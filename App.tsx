@@ -33,10 +33,11 @@ const App = () => {
   return (
     <SafeAreaView>
       <View>
-        <View>
+        <View style={styles.header}>
           <Text style={styles.h1}>RADIUM CARE</Text>
         </View>
         <FlatList
+          style={styles.list}
           refreshing={loading}
           onRefresh={onRefresh}
           ListHeaderComponent={<Text style={styles.title}>CLIENTS</Text>}
@@ -65,6 +66,12 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: 'center',
     textDecorationLine: 'underline',
+  },
+  header: {
+    height: '10%',
+  },
+  list:{
+    height: '90%',
   }
 });
 
