@@ -7,13 +7,15 @@ import {
   View,
   FlatList,
   Alert,
+  Pressable,
 } from 'react-native';
-import CustomButton from './components/CustomButton';
-import CustomInput from './components/CustomInput';
-import ListItem from './components/ListItem';
+import CustomButton from './components/shared/CustomButton';
+import CustomInput from './components/shared/CustomInput';
+import ListItem from './components/shared/ListItem';
 //import Login from './components/Login';
 import clientType from './helpers/clientType';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import FlipperAsyncStorage from 'rn-flipper-async-storage-advanced';
 interface Data {
   email: string,
   password: string,
@@ -64,6 +66,12 @@ const App = () => {
     }
   }
 
+  const deleteHandler = (id: number) => {
+    setClients((prevClient) => {
+      return prevClient.filter(client => client.id != id)
+    })
+  }
+
   const {
     control,
     handleSubmit,
@@ -72,18 +80,20 @@ const App = () => {
 
   return (
     <SafeAreaView style={styles.safeArea}>
+      <FlipperAsyncStorage />
       <View style={styles.container}>
         <View>
           <Text style={styles.h1}>RADIUM CARE</Text>
         </View>
-          {isLogged ? <FlatList
+          {isLogged ?
+          <FlatList
             refreshing={loading}
             onRefresh={onRefresh}
             ListHeaderComponent={<Text style={styles.title}>CLIENTS</Text>}
             keyExtractor={(item) => item.id.toString()}
             data={clients}
-            renderItem={({item}) => (
-              <ListItem id={item.id} name={item.name} email={item.email} />
+            renderItem={({ item }) => (
+              <ListItem id={item.id} name={item.name} email={item.email} onDelete={() => deleteHandler(item.id)} />
             )}
           /> :
           <View>
@@ -138,6 +148,21 @@ const styles = StyleSheet.create({
   },
   container:{
     flex: 1,
+  },
+  button: {
+    backgroundColor: '#fff',
+    margin: 5,
+    padding: 5,
+    width: 90,
+    borderColor: '#015D67',
+    borderRadius: 20,
+  },
+  buttonText: {
+    color: '#015D67',
+    textAlign: 'center',
+    fontWeight: '800',
+  },
+  buttonContainer: {
   }
 });
 
