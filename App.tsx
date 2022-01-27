@@ -31,22 +31,21 @@ const App = () => {
   }, [])
 
   return (
-    <SafeAreaView>
-      <View>
-        <View style={styles.header}>
+    <SafeAreaView style={styles.safeArea}>
+      <View style={styles.container}>
+        <View>
           <Text style={styles.h1}>RADIUM CARE</Text>
         </View>
-        <FlatList
-          style={styles.list}
-          refreshing={loading}
-          onRefresh={onRefresh}
-          ListHeaderComponent={<Text style={styles.title}>CLIENTS</Text>}
-          keyExtractor={(item) => item.id.toString()}
-          data={clients}
-          renderItem={({item}) => (
-            <ListItem id={item.id} name={item.name} email={item.email} />
-          )}
-        />
+          <FlatList
+            refreshing={loading}
+            onRefresh={onRefresh}
+            ListHeaderComponent={<Text style={styles.title}>CLIENTS</Text>}
+            keyExtractor={(item) => item.id.toString()}
+            data={clients}
+            renderItem={({item}) => (
+              <ListItem id={item.id} name={item.name} email={item.email} />
+            )}
+          />
       </View>
     </SafeAreaView>
   );
@@ -67,11 +66,11 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     textDecorationLine: 'underline',
   },
-  header: {
-    height: '10%',
+  safeArea: {
+    flex: 1,
   },
-  list:{
-    height: '90%',
+  container:{
+    flex: 1,
   }
 });
 
