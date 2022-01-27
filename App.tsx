@@ -13,6 +13,7 @@ import CustomInput from './components/CustomInput';
 import ListItem from './components/ListItem';
 //import Login from './components/Login';
 import clientType from './helpers/clientType';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 interface Data {
   email: string,
   password: string,
@@ -47,11 +48,22 @@ const App = () => {
   const onSignInPressed = (data: Data) => {
     console.log('email', data.email, 'password', data.password);
     if(data.email === email && data.password === password){
-      setIsLogged(true)
+      setIsLogged(true);
+      storeData(data);
     } else {
       Alert.alert('Invalid user, try again.')
     }
+  }
+
+  const storeData = async (data: Data) => {
+    try {
+      const jsonValue = JSON.stringify(data)
+      await AsyncStorage.setItem('@storage_Key', jsonValue)
+    } catch (e) {
+      console.log(e)
     }
+  }
+
   const {
     control,
     handleSubmit,
