@@ -16,6 +16,7 @@ import ListItem from './components/shared/ListItem';
 import clientType from './helpers/clientType';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import FlipperAsyncStorage from 'rn-flipper-async-storage-advanced';
+import Toast from 'react-native-simple-toast';
 interface Data {
   email: string,
   password: string,
@@ -53,7 +54,7 @@ const App = () => {
       setIsLogged(true);
       storeData(data);
     } else {
-      Alert.alert('Invalid user, try again.')
+      Toast.show('Invalid user, try again.')
     }
   }
 
@@ -68,8 +69,13 @@ const App = () => {
 
   const deleteHandler = (id: number) => {
     setClients((prevClient) => {
+      Toast.show('Client deleted successfully');
       return prevClient.filter(client => client.id != id)
     })
+  }
+
+  const updateHandler = (id: number) => {
+    return Toast.show('Client updated successfully');
   }
 
   const {
@@ -93,7 +99,7 @@ const App = () => {
             keyExtractor={(item) => item.id.toString()}
             data={clients}
             renderItem={({ item }) => (
-              <ListItem id={item.id} name={item.name} email={item.email} onDelete={() => deleteHandler(item.id)} />
+              <ListItem id={item.id} name={item.name} email={item.email} onDelete={() => deleteHandler(item.id)} onUpdatePressed={() => updateHandler(item.id)}/>
             )}
           /> :
           <View>
