@@ -87,6 +87,10 @@ const App = () => {
     setShowAddForm(true);
   };
 
+  const onCloseAdd = () => {
+    setShowAddForm(false);
+  };
+
   const {
     control,
     handleSubmit,
@@ -102,7 +106,9 @@ const App = () => {
         </View>
         {isLogged ? (
           <>
-            {showAddForm && <ClientsForm />}
+            {showAddForm && (
+              <ClientsForm clients={clients} onCloseAdd={onCloseAdd} />
+            )}
             <FlatList
               refreshing={loading}
               onRefresh={onRefresh}
