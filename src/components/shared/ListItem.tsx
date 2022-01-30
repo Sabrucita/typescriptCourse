@@ -83,7 +83,7 @@ const ListItem: React.FC<Props> = ({
             <Text style={styles.item}>Name: {name}</Text>
             <Text style={styles.item}>Email: {email}</Text>
           </View>
-          <View style={styles.buttonContainer}>
+          <View>
             <Pressable style={styles.button} onPress={onDelete}>
               <Text style={styles.buttonText}>Delete</Text>
             </Pressable>
@@ -105,7 +105,9 @@ const styles = StyleSheet.create({
   listContainer: {
     fontWeight: '700',
     fontSize: 20,
-    backgroundColor: '#C2D7DA',
+    borderWidth: 0.2,
+    borderLeftWidth: 5,
+    borderLeftColor: '#015D67',
     padding: 20,
     textAlign: 'center',
     margin: 10,
@@ -121,6 +123,7 @@ const styles = StyleSheet.create({
     margin: 5,
     padding: 5,
     width: 90,
+    borderWidth: 1,
     borderColor: '#015D67',
     borderRadius: 20,
   },
@@ -129,7 +132,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontWeight: '800',
   },
-  buttonContainer: {},
 });
 
 export default ListItem;
