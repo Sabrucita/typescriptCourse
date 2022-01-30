@@ -47,10 +47,18 @@ const App = () => {
 
   useEffect(() => {
     onRefresh();
+    checkPreviousLogin();
   }, []);
 
   const email = 'sabri@mail.com';
   const password = 'pass1234';
+
+  const checkPreviousLogin = async () => {
+    const loginData = await AsyncStorage.getItem('loginData');
+    if (loginData !== null) {
+      setIsLogged(true);
+    }
+  };
 
   const onSignInPressed = (data: Data) => {
     if (data.email !== email) {
@@ -66,7 +74,7 @@ const App = () => {
   const storeData = async (data: Data) => {
     try {
       const jsonValue = JSON.stringify(data);
-      await AsyncStorage.setItem('@storage_Key', jsonValue);
+      await AsyncStorage.setItem('loginData', jsonValue);
     } catch (e) {
       console.log(e);
     }
