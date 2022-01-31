@@ -23,6 +23,7 @@ const AddClientsForm: React.FC<Props> = ({onCloseButton, clients}) => {
     data.id = newId;
     clients.push(data);
     Toast.show('New client added successfully.');
+    onCloseButton();
   };
 
   const {
