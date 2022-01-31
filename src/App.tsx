@@ -11,19 +11,20 @@ import {
 import CustomButton from './components/shared/CustomButton';
 import CustomInput from './components/shared/CustomInput';
 import ListItem from './components/shared/ListItem';
-//import Login from './components/Login';
 import clientType from './helpers/clientType';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import FlipperAsyncStorage from 'rn-flipper-async-storage-advanced';
 import Toast from 'react-native-simple-toast';
-import ClientsForm from './components/shared/ClientsForm';
+import AddClientsForm from './components/shared/AddClientsForm';
+import {NavigationContainer} from '@react-navigation/native';
 
 interface Data {
   email: string;
   password: string;
 }
+interface Props {}
 
-const App = () => {
+const App: React.FC<Props> = () => {
   const [isLogged, setIsLogged] = React.useState(false);
   const [clients, setClients] = useState<clientType[]>([]);
   const [loading, setLoading] = useState(false);
@@ -80,6 +81,17 @@ const App = () => {
     }
   };
 
+  const onUpdateClient = (client: clientType) => {
+    clients.map(oneClient => {
+      if (oneClient.id === client.id) {
+        oneClient.name = client.name;
+        oneClient.email = client.email;
+      }
+      return client;
+    });
+    Toast.show('Client updated successfully.');
+  };
+
   const deleteHandler = (id: number) => {
     setClients(prevClient => {
       Toast.show('Client deleted successfully');
@@ -87,15 +99,11 @@ const App = () => {
     });
   };
 
-  const updateHandler = () => {
-    return Toast.show('Client updated successfully');
-  };
-
   const addClientPressed = () => {
     setShowAddForm(true);
   };
 
-  const onCloseAdd = () => {
+  const onCloseButton = () => {
     setShowAddForm(false);
   };
 
@@ -107,78 +115,85 @@ const App = () => {
 
   return (
     <SafeAreaView style={styles.safeArea}>
-      <FlipperAsyncStorage />
-      <View style={styles.container}>
-        <View>
-          <Text style={styles.h1}>RADIUM CARE</Text>
-        </View>
-        {isLogged ? (
-          <>
-            {showAddForm && (
-              <ClientsForm clients={clients} onCloseAdd={onCloseAdd} />
-            )}
-            <FlatList
-              refreshing={loading}
-              onRefresh={onRefresh}
-              ListHeaderComponent={
-                <>
-                  <Text style={styles.title}>CLIENTS</Text>
-                  <Pressable style={styles.button}>
-                    <Text style={styles.buttonText} onPress={addClientPressed}>
-                      Add Client
-                    </Text>
-                  </Pressable>
-                </>
-              }
-              keyExtractor={item => item.id.toString()}
-              data={clients}
-              renderItem={({item}) => (
-                <ListItem
-                  id={item.id}
-                  name={item.name}
-                  email={item.email}
-                  onDelete={() => deleteHandler(item.id)}
-                  onUpdatePressed={() => updateHandler()}
+      <NavigationContainer>
+        <FlipperAsyncStorage />
+        <View style={styles.container}>
+          <View>
+            <Text style={styles.h1}>RADIUM CARE</Text>
+          </View>
+          {isLogged ? (
+            <>
+              {showAddForm && (
+                <AddClientsForm
+                  clients={clients}
+                  onCloseButton={onCloseButton}
                 />
               )}
-            />
-          </>
-        ) : (
-          <View>
-            <CustomInput
-              name="email"
-              placeholder="Email"
-              keyboardType="email-address"
-              autoCapitalize="none"
-              secureTextEntry={false}
-              control={control}
-              rules={{
-                required: 'Email is required',
-                pattern: {value: EMAIL_REGEX, message: 'Email is invalid'},
-              }}
-            />
-            <CustomInput
-              name="password"
-              placeholder="Password"
-              control={control}
-              keyboardType="default"
-              autoCapitalize="none"
-              secureTextEntry={true}
-              rules={{
-                required: 'Password is required',
-                minLength: {
-                  value: 8,
-                  message: 'Password should be at least 8 characters long',
-                },
-              }}
-            />
-            <CustomButton
-              onPress={handleSubmit(onSignInPressed)}
-              text="SUBMIT"
-            />
-          </View>
-        )}
-      </View>
+              <FlatList
+                refreshing={loading}
+                onRefresh={onRefresh}
+                ListHeaderComponent={
+                  <>
+                    <Text style={styles.title}>CLIENTS</Text>
+                    <Pressable style={styles.button}>
+                      <Text
+                        style={styles.buttonText}
+                        onPress={addClientPressed}>
+                        Add Client
+                      </Text>
+                    </Pressable>
+                  </>
+                }
+                keyExtractor={item => item.id.toString()}
+                data={clients}
+                renderItem={({item}) => (
+                  <ListItem
+                    client={item}
+                    onDelete={() => deleteHandler(item.id)}
+                    onCloseButton={onCloseButton}
+                    onUpdateClient={onUpdateClient}
+                    clients={[]}
+                  />
+                )}
+              />
+            </>
+          ) : (
+            <View>
+              <CustomInput
+                name="email"
+                placeholder="Email"
+                keyboardType="email-address"
+                autoCapitalize="none"
+                secureTextEntry={false}
+                control={control}
+                rules={{
+                  required: 'Email is required',
+                  pattern: {value: EMAIL_REGEX, message: 'Email is invalid'},
+                }}
+              />
+              <CustomInput
+                name="password"
+                placeholder="Password"
+                control={control}
+                keyboardType="default"
+                autoCapitalize="none"
+                secureTextEntry={true}
+                rules={{
+                  required: 'Password is required',
+                  minLength: {
+                    value: 8,
+                    message: 'Password should be at least 8 characters long',
+                  },
+                }}
+              />
+              <CustomButton
+                onPress={handleSubmit(onSignInPressed)}
+                text="SUBMIT"
+              />
+            </View>
+          )}
+        </View>
+      </NavigationContainer>
     </SafeAreaView>
   );
 };

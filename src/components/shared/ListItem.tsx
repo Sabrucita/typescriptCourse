@@ -1,16 +1,15 @@
 import React, {useState} from 'react';
 import {useForm} from 'react-hook-form';
 import {Pressable, StyleSheet, Text, View} from 'react-native';
-import CustomButton from './CustomButton';
-import CustomInput from './CustomInput';
-//import Toast from 'react-native-simple-toast';
+import clientType from '../../helpers/clientType';
+import UpdateClientsForm from './UpdateClientsForm';
 
 interface Props {
-  id: number;
-  name: string;
-  email: string;
+  client: clientType;
   onDelete: () => void;
-  onUpdatePressed: () => void;
+  onCloseButton: () => void;
+  clients: clientType[];
+  onUpdateClient: (client: clientType) => void;
 }
 
 interface Data {
@@ -19,64 +18,34 @@ interface Data {
 }
 
 const ListItem: React.FC<Props> = ({
-  id,
-  name,
-  email,
+  client,
+  client: {id, name, email},
   onDelete,
-  onUpdatePressed,
+  onUpdateClient,
 }) => {
   const [isUpdating, setIsUpdating] = useState(false);
-  const EMAIL_REGEX =
-    /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
   const onUpdate = () => {
     setIsUpdating(true);
-    return (
-      <View>
-        <CustomInput
-          name="name"
-          placeholder="Full name"
-          control={control}
-          keyboardType="default"
-          rules={{
-            required: 'Full name is required',
-            minLength: {
-              value: 5,
-              message: 'Full name should be at least 5 characters long',
-            },
-          }}
-          autoCapitalize={''}
-          secureTextEntry={false}
-        />
-        <CustomInput
-          name="email"
-          placeholder="Email"
-          keyboardType="email-address"
-          control={control}
-          rules={{
-            required: 'Email is required',
-            pattern: {value: EMAIL_REGEX, message: 'Email is invalid'},
-          }}
-          autoCapitalize={''}
-          secureTextEntry={false}
-        />
-        <CustomButton
-          onPress={handleSubmit(onUpdatePressed)}
-          text="Update Client"
-        />
-      </View>
-    );
+  };
+
+  const onCloseButton = () => {
+    setIsUpdating(false);
   };
 
   const {
-    control,
-    handleSubmit,
     formState: {},
   } = useForm<Data>();
 
   return (
     <View style={styles.listContainer}>
-      {!isUpdating ? (
+      {isUpdating ? (
+        <UpdateClientsForm
+          onUpdateClient={onUpdateClient}
+          onCloseButton={onCloseButton}
+          client={client}
+        />
+      ) : (
         <>
           <View>
             <Text style={styles.item}>ID: {id}</Text>
@@ -94,8 +63,6 @@ const ListItem: React.FC<Props> = ({
             </Pressable>
           </View>
         </>
-      ) : (
-        onUpdate()
       )}
     </View>
   );
