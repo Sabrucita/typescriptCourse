@@ -1,15 +1,15 @@
 import React, {useState} from 'react';
 import {useForm} from 'react-hook-form';
 import {Pressable, StyleSheet, Text, View} from 'react-native';
-import clientType from '../../helpers/clientType';
-import UpdateClientsForm from './UpdateClientsForm';
+import {ClientType} from '../../../helpers/Types';
+import UpdateClientsForm from '../../UpdateClientsForm';
 
 interface Props {
-  client: clientType;
+  client: ClientType;
   onDelete: () => void;
   onCloseButton: () => void;
-  clients: clientType[];
-  onUpdateClient: (client: clientType) => void;
+  clients: ClientType[];
+  onUpdateClient: (client: ClientType) => void;
 }
 
 interface Data {

@@ -1,20 +1,20 @@
 import React from 'react';
 import {useForm} from 'react-hook-form';
 import {StyleSheet, View} from 'react-native';
-import clientType from '../../helpers/clientType';
-import CustomButton from './CustomButton';
-import CustomInput from './CustomInput';
+import {ClientType} from '../../helpers/Types';
+import CustomButton from '../shared/CustomButton';
+import CustomInput from '../shared/CustomInput';
 import Toast from 'react-native-simple-toast';
 interface Props {
   onCloseButton: () => void;
-  clients: clientType[];
+  clients: ClientType[];
 }
 
 const AddClientsForm: React.FC<Props> = ({onCloseButton, clients}) => {
   const EMAIL_REGEX =
     /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
-  const onAddClientPressed = (data: clientType) => {
+  const onAddClientPressed = (data: ClientType) => {
     const sortedList = clients.sort((a, b) => {
       return a.id - b.id;
     });
@@ -30,7 +30,7 @@ const AddClientsForm: React.FC<Props> = ({onCloseButton, clients}) => {
     control,
     handleSubmit,
     formState: {},
-  } = useForm<clientType>();
+  } = useForm<ClientType>();
   return (
     <>
       <View style={styles.addContainer}>

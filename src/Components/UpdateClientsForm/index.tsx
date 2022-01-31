@@ -1,14 +1,14 @@
 import React, {useEffect} from 'react';
 import {SubmitHandler, useForm} from 'react-hook-form';
 import {StyleSheet, View} from 'react-native';
-import clientType from '../../helpers/clientType';
-import CustomButton from './CustomButton';
-import CustomInput from './CustomInput';
+import {ClientType} from '../../helpers/Types';
+import CustomButton from '../shared/CustomButton';
+import CustomInput from '../shared/CustomInput';
 
 interface Props {
   onCloseButton: () => void;
-  client: clientType;
-  onUpdateClient: (client: clientType) => void;
+  client: ClientType;
+  onUpdateClient: (client: ClientType) => void;
 }
 
 const UpdateClientsForm: React.FC<Props> = ({
@@ -19,7 +19,7 @@ const UpdateClientsForm: React.FC<Props> = ({
   const EMAIL_REGEX =
     /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
-  const onSubmit: SubmitHandler<clientType> = data => {
+  const onSubmit: SubmitHandler<ClientType> = data => {
     onUpdateClient({
       ...client,
       ...data,
@@ -32,7 +32,7 @@ const UpdateClientsForm: React.FC<Props> = ({
     handleSubmit,
     setValue,
     formState: {},
-  } = useForm<clientType>();
+  } = useForm<ClientType>();
 
   useEffect(() => {
     setValue('name', client.name);
