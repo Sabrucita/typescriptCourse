@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {SafeAreaView, StyleSheet, View, FlatList} from 'react-native';
 import FlipperAsyncStorage from 'rn-flipper-async-storage-advanced';
 import Toast from 'react-native-simple-toast';
@@ -7,6 +7,7 @@ import {ClientType, RootStackParamList} from '../../helpers/Types';
 //import AddClientsForm from '../AddClientsForm';
 import ListItem from '../shared/ListItem';
 import CustomButton from '../shared/CustomButton';
+import {AppPermissionsContext} from '../../context/';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'AddClientsForm'>;
 
@@ -14,23 +15,7 @@ const ClientsList: React.FC<Props> = ({navigation}) => {
   const [clients, setClients] = useState<ClientType[]>([]);
   const [loading, setLoading] = useState(false);
   const [showAddForm, setShowAddForm] = useState(false);
-
-  const onRefresh = () => {
-    setLoading(true);
-    fetch('https://jsonplaceholder.typicode.com/users')
-      .then(async response => await response.json())
-      .then(response => {
-        setClients(response);
-        setLoading(false);
-      })
-      .catch(error => {
-        error;
-      });
-  };
-
-  useEffect(() => {
-    onRefresh();
-  }, []);
+  const permissionsProvider = useContext(AppPermissionsContext);
 
   const onUpdateClient = (client: ClientType) => {
     clients.map(oneClient => {
@@ -76,7 +61,6 @@ const ClientsList: React.FC<Props> = ({navigation}) => {
           )}
           <FlatList
             refreshing={loading}
-            onRefresh={onRefresh}
             ListHeaderComponent={
               <>
                 <CustomButton
@@ -90,8 +74,7 @@ const ClientsList: React.FC<Props> = ({navigation}) => {
                 />
               </>
             }
-            keyExtractor={item => item.id.toString()}
-            data={clients}
+            data={permissionsProvider?.clients}
             renderItem={({item}) => (
               <ListItem
                 client={item}

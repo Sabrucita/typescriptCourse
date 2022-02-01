@@ -2,13 +2,16 @@ import React from 'react';
 import {SafeAreaView, StyleSheet} from 'react-native';
 import FlipperAsyncStorage from 'rn-flipper-async-storage-advanced';
 import Navigator from './routes/Navigator';
+import AppPermissionsProvider from './context';
 
 const App = () => {
   return (
-    <SafeAreaView style={styles.safeArea}>
-      <FlipperAsyncStorage />
-      <Navigator />
-    </SafeAreaView>
+    <AppPermissionsProvider>
+      <SafeAreaView style={styles.safeArea}>
+        <FlipperAsyncStorage />
+        <Navigator />
+      </SafeAreaView>
+    </AppPermissionsProvider>
   );
 };
 

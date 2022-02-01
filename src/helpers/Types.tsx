@@ -41,3 +41,8 @@ export type RootStackParamList = {
     setClients: React.Dispatch<React.SetStateAction<ClientType[]>>;
   };
 };
+
+export interface iClientContext {
+  clients: ClientType[] | null;
+  loading: boolean;
+}
