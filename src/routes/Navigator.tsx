@@ -24,8 +24,11 @@ const Navigator = () => {
 
   function ClientStackScreen() {
     return (
-      <ClientsStack.Navigator>
-        <ClientsStack.Screen name="CLIENTS LIST" component={ClientsList} />
+      <ClientsStack.Navigator
+        screenOptions={() => ({
+          headerTitle: '',
+        })}>
+        <ClientsStack.Screen name="ClientsList" component={ClientsList} />
         <ClientsStack.Screen name="AddClientsForm" component={AddClientsForm} />
         <ClientsStack.Screen
           name="UpdateClientForm"

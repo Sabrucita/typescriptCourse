@@ -1,22 +1,16 @@
 import React, {useState, useEffect} from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  View,
-  FlatList,
-  Pressable,
-} from 'react-native';
+import {SafeAreaView, StyleSheet, View, FlatList} from 'react-native';
 import FlipperAsyncStorage from 'rn-flipper-async-storage-advanced';
 import Toast from 'react-native-simple-toast';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {ClientType, RootStackParamList} from '../../helpers/Types';
-import AddClientsForm from '../AddClientsForm';
+//import AddClientsForm from '../AddClientsForm';
 import ListItem from '../shared/ListItem';
+import CustomButton from '../shared/CustomButton';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'AddClientsForm'>;
 
-const ClientsList: React.FC<Props> = () => {
+const ClientsList: React.FC<Props> = ({navigation}) => {
   const [clients, setClients] = useState<ClientType[]>([]);
   const [loading, setLoading] = useState(false);
   const [showAddForm, setShowAddForm] = useState(false);
@@ -56,9 +50,9 @@ const ClientsList: React.FC<Props> = () => {
     });
   };
 
-  const addClientPressed = () => {
+  /*const addClientPressed = () => {
     setShowAddForm(true);
-  };
+  };*/
 
   const onCloseButton = () => {
     setShowAddForm(false);
@@ -70,19 +64,30 @@ const ClientsList: React.FC<Props> = () => {
       <View style={styles.container}>
         <>
           {showAddForm && (
-            <AddClientsForm clients={clients} onCloseButton={onCloseButton} />
+            <CustomButton
+              onPress={() =>
+                navigation.navigate('AddClientsForm', {
+                  clients,
+                  setClients,
+                })
+              }
+              text="AddClientsForm"
+            />
           )}
           <FlatList
             refreshing={loading}
             onRefresh={onRefresh}
             ListHeaderComponent={
               <>
-                {/*<Text style={styles.title}>CLIENTS</Text>*/}
-                <Pressable style={styles.button}>
-                  <Text style={styles.buttonText} onPress={addClientPressed}>
-                    Add Client
-                  </Text>
-                </Pressable>
+                <CustomButton
+                  onPress={() =>
+                    navigation.navigate('AddClientsForm', {
+                      clients,
+                      setClients,
+                    })
+                  }
+                  text="ADD NEW CLIENT"
+                />
               </>
             }
             keyExtractor={item => item.id.toString()}

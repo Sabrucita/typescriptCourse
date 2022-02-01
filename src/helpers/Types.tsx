@@ -25,6 +25,7 @@ export type ClientType = {
 export type RootStackParamList = {
   Login: undefined;
   Home: undefined;
+  Welcome: undefined;
   ClientsList: undefined;
   AddClientsForm: {
     clients: ClientType[];
