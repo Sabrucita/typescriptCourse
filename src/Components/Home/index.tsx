@@ -22,6 +22,7 @@ const styles = StyleSheet.create({
   welcomeText: {
     fontSize: 20,
     textAlign: 'center',
+    marginTop: '50%',
   },
   radiumText: {
     fontSize: 30,
