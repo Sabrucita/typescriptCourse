@@ -11,6 +11,7 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		4BDA833D27A95D8B00E32266 /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = 4BDA833C27A95D8B00E32266 /* Fonts */; };
 		6172F2D35A4C3AA820D92908 /* libPods-typescriptCourse.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6423831EA8574132BED9D8CC /* libPods-typescriptCourse.a */; };
 		7EF68E3733C33B6898317E18 /* libPods-typescriptCourse-typescriptCourseTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ABFE59519B596E51CEFDCCC0 /* libPods-typescriptCourse-typescriptCourseTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
@@ -37,6 +38,7 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = typescriptCourse/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = typescriptCourse/main.m; sourceTree = "<group>"; };
 		1D0AE47A65C8663E3B452821 /* Pods-typescriptCourse-typescriptCourseTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-typescriptCourse-typescriptCourseTests.release.xcconfig"; path = "Target Support Files/Pods-typescriptCourse-typescriptCourseTests/Pods-typescriptCourse-typescriptCourseTests.release.xcconfig"; sourceTree = "<group>"; };
+		4BDA833C27A95D8B00E32266 /* Fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Fonts; path = "../node_modules/react-native-vector-icons/Fonts"; sourceTree = "<group>"; };
 		6423831EA8574132BED9D8CC /* libPods-typescriptCourse.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-typescriptCourse.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C97AB639B58BBB4B15BBE30 /* Pods-typescriptCourse-typescriptCourseTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-typescriptCourse-typescriptCourseTests.debug.xcconfig"; path = "Target Support Files/Pods-typescriptCourse-typescriptCourseTests/Pods-typescriptCourse-typescriptCourseTests.debug.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = typescriptCourse/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -86,6 +88,7 @@
 		13B07FAE1A68108700A75B9A /* typescriptCourse */ = {
 			isa = PBXGroup;
 			children = (
+				4BDA833C27A95D8B00E32266 /* Fonts */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -145,7 +148,6 @@
 				6C97AB639B58BBB4B15BBE30 /* Pods-typescriptCourse-typescriptCourseTests.debug.xcconfig */,
 				1D0AE47A65C8663E3B452821 /* Pods-typescriptCourse-typescriptCourseTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -243,6 +245,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4BDA833D27A95D8B00E32266 /* Fonts in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 			);
