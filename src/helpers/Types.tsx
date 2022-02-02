@@ -27,10 +27,7 @@ export type RootStackParamList = {
   Home: undefined;
   Welcome: undefined;
   ClientsList: undefined;
-  AddClientsForm: {
-    clients: ClientType[];
-    setClients: React.Dispatch<React.SetStateAction<ClientType[]>>;
-  };
+  AddClientsForm: undefined;
   UpdateClientsForm: {
     clients: ClientType[];
     selectedClient: {
@@ -47,4 +44,5 @@ export interface iClientContext {
   loading: boolean;
   deleteHandler: (id: number) => void;
   onUpdateClient: (client: ClientType) => void;
+  onAddClientPressed: (data: ClientType) => void;
 }

@@ -2,6 +2,7 @@ import React, {useState, useEffect, createContext, FC} from 'react';
 import {ClientType} from '../helpers/Types';
 import {iClientContext} from '../helpers/Types';
 import Toast from 'react-native-simple-toast';
+import {SubmitHandler} from 'react-hook-form';
 
 export const AppPermissionsContext = createContext<iClientContext | null>(null);
 
@@ -44,6 +45,22 @@ const AppPermissionsProvider: FC = ({children}) => {
     Toast.show('Client updated successfully.');
   };
 
+  const onAddClientPressed: SubmitHandler<ClientType> = data => {
+    const sortedList = clients.sort((a, b) => {
+      return a.id - b.id;
+    });
+    const listLength = sortedList.length - 1;
+    const newId = sortedList[listLength].id + 1;
+    data.id = newId;
+    setClients([
+      ...clients,
+      {
+        ...data,
+      },
+    ]);
+    Toast.show('New client added successfully.');
+  };
+
   return (
     <AppPermissionsContext.Provider
       value={{
@@ -51,6 +68,7 @@ const AppPermissionsProvider: FC = ({children}) => {
         loading,
         deleteHandler,
         onUpdateClient,
+        onAddClientPressed,
       }}>
       {children}
     </AppPermissionsContext.Provider>

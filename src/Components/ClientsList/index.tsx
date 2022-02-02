@@ -3,7 +3,6 @@ import {SafeAreaView, StyleSheet, View, FlatList} from 'react-native';
 import FlipperAsyncStorage from 'rn-flipper-async-storage-advanced';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {ClientType, RootStackParamList} from '../../helpers/Types';
-//import AddClientsForm from '../AddClientsForm';
 import ListItem from '../shared/ListItem';
 import CustomButton from '../shared/CustomButton';
 import {AppPermissionsContext} from '../../context/';
@@ -11,7 +10,6 @@ import {AppPermissionsContext} from '../../context/';
 type Props = NativeStackScreenProps<RootStackParamList, 'AddClientsForm'>;
 
 const ClientsList: React.FC<Props> = ({navigation}) => {
-  const [clients, setClients] = useState<ClientType[]>([]);
   const [showAddForm, setShowAddForm] = useState(false);
   const permissionsProvider = useContext(AppPermissionsContext);
 
@@ -30,12 +28,7 @@ const ClientsList: React.FC<Props> = ({navigation}) => {
         <>
           {showAddForm && (
             <CustomButton
-              onPress={() =>
-                navigation.navigate('AddClientsForm', {
-                  clients,
-                  setClients,
-                })
-              }
+              onPress={() => navigation.navigate('AddClientsForm')}
               text="AddClientsForm"
             />
           )}
@@ -44,12 +37,7 @@ const ClientsList: React.FC<Props> = ({navigation}) => {
             ListHeaderComponent={
               <>
                 <CustomButton
-                  onPress={() =>
-                    navigation.navigate('AddClientsForm', {
-                      clients,
-                      setClients,
-                    })
-                  }
+                  onPress={() => navigation.navigate('AddClientsForm')}
                   text="ADD NEW CLIENT"
                 />
               </>

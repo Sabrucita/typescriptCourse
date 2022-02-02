@@ -1,33 +1,21 @@
-import React from 'react';
-import {SubmitHandler, useForm} from 'react-hook-form';
+import React, {useContext} from 'react';
+import {useForm} from 'react-hook-form';
 import {StyleSheet, Text, View} from 'react-native';
 import {ClientType, RootStackParamList} from '../../helpers/Types';
 import CustomButton from '../shared/CustomButton';
 import CustomInput from '../shared/CustomInput';
-import Toast from 'react-native-simple-toast';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {AppPermissionsContext} from '../../context/';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'AddClientsForm'>;
 
-const AddClientsForm = ({navigation, route}: Props) => {
-  const {clients, setClients} = route.params;
+const AddClientsForm = ({navigation}: Props) => {
+  const permissionsProvider = useContext(AppPermissionsContext);
   const EMAIL_REGEX =
     /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
-  const onAddClientPressed: SubmitHandler<ClientType> = data => {
-    const sortedList = clients.sort((a, b) => {
-      return a.id - b.id;
-    });
-    const listLength = sortedList.length - 1;
-    const newId = sortedList[listLength].id + 1;
-    data.id = newId;
-    setClients([
-      ...clients,
-      {
-        ...data,
-      },
-    ]);
-    Toast.show('New client added successfully.');
+  const onCreate = (client: ClientType) => {
+    permissionsProvider?.onAddClientPressed(client);
     navigation.navigate('ClientsList');
   };
 
@@ -66,10 +54,7 @@ const AddClientsForm = ({navigation, route}: Props) => {
             pattern: {value: EMAIL_REGEX, message: 'Email is invalid'},
           }}
         />
-        <CustomButton
-          onPress={handleSubmit(onAddClientPressed)}
-          text="ADD NEW CLIENT"
-        />
+        <CustomButton onPress={handleSubmit(onCreate)} text="ADD NEW CLIENT" />
       </View>
     </>
   );
