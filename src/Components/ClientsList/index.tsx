@@ -1,7 +1,6 @@
-import React, {useState, useEffect, useContext} from 'react';
+import React, {useState, useContext} from 'react';
 import {SafeAreaView, StyleSheet, View, FlatList} from 'react-native';
 import FlipperAsyncStorage from 'rn-flipper-async-storage-advanced';
-import Toast from 'react-native-simple-toast';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {ClientType, RootStackParamList} from '../../helpers/Types';
 //import AddClientsForm from '../AddClientsForm';
@@ -13,34 +12,15 @@ type Props = NativeStackScreenProps<RootStackParamList, 'AddClientsForm'>;
 
 const ClientsList: React.FC<Props> = ({navigation}) => {
   const [clients, setClients] = useState<ClientType[]>([]);
-  const [loading, setLoading] = useState(false);
   const [showAddForm, setShowAddForm] = useState(false);
   const permissionsProvider = useContext(AppPermissionsContext);
 
-  const onUpdateClient = (client: ClientType) => {
-    clients.map(oneClient => {
-      if (oneClient.id === client.id) {
-        oneClient.name = client.name;
-        oneClient.email = client.email;
-      }
-      return client;
-    });
-    Toast.show('Client updated successfully.');
-  };
-
-  const deleteHandler = (id: number) => {
-    setClients(prevClient => {
-      Toast.show('Client deleted successfully');
-      return prevClient.filter(client => client.id !== id);
-    });
-  };
-
-  /*const addClientPressed = () => {
-    setShowAddForm(true);
-  };*/
-
   const onCloseButton = () => {
     setShowAddForm(false);
+  };
+
+  const onUpdate = (client: ClientType) => {
+    permissionsProvider?.onUpdateClient(client);
   };
 
   return (
@@ -60,7 +40,7 @@ const ClientsList: React.FC<Props> = ({navigation}) => {
             />
           )}
           <FlatList
-            refreshing={loading}
+            refreshing={permissionsProvider?.loading}
             ListHeaderComponent={
               <>
                 <CustomButton
@@ -78,9 +58,9 @@ const ClientsList: React.FC<Props> = ({navigation}) => {
             renderItem={({item}) => (
               <ListItem
                 client={item}
-                onDelete={() => deleteHandler(item.id)}
+                onDelete={() => permissionsProvider?.deleteHandler(item.id)}
                 onCloseButton={onCloseButton}
-                onUpdateClient={onUpdateClient}
+                onUpdateClient={onUpdate}
                 clients={[]}
               />
             )}

@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import {SubmitHandler, useForm} from 'react-hook-form';
-import {StyleSheet, View} from 'react-native';
+import {View} from 'react-native';
 import {ClientType} from '../../helpers/Types';
 import CustomButton from '../shared/CustomButton';
 import CustomInput from '../shared/CustomInput';
@@ -41,7 +41,7 @@ const UpdateClientsForm: React.FC<Props> = ({
 
   return (
     <>
-      <View style={styles.addContainer}>
+      <View>
         <CustomInput
           name="name"
           placeholder="Full name"
@@ -74,9 +74,5 @@ const UpdateClientsForm: React.FC<Props> = ({
     </>
   );
 };
-
-const styles = StyleSheet.create({
-  addContainer: {},
-});
 
 export default UpdateClientsForm;
