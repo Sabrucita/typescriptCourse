@@ -1,15 +1,9 @@
-/**
- * @format
- */
-
 import 'react-native';
 import React from 'react';
 import CustomButton from '../src/Components/shared/CustomButton';
 
 // Note: test renderer must be required after react-native.
 import {render, waitFor} from '@testing-library/react-native';
-
-jest.useFakeTimers();
 
 describe('CustomButton', () => {
   it('renders correctly', async () => {

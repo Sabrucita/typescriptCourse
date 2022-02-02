@@ -1,15 +1,9 @@
-/**
- * @format
- */
-
 import 'react-native';
 import React from 'react';
 import ListItem from '../src/Components/shared/ListItem';
 
 // Note: test renderer must be required after react-native.
 import {render, waitFor, fireEvent} from '@testing-library/react-native';
-
-jest.useFakeTimers();
 
 const client = {
   id: 1,
