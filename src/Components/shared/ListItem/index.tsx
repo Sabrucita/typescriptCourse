@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import {useForm} from 'react-hook-form';
 import {Pressable, StyleSheet, Text, View} from 'react-native';
 import {ClientType} from '../../../helpers/Types';
 import UpdateClientsForm from '../../UpdateClientsForm';
@@ -7,14 +6,7 @@ import UpdateClientsForm from '../../UpdateClientsForm';
 interface Props {
   client: ClientType;
   onDelete: () => void;
-  onCloseButton: () => void;
-  clients: ClientType[];
   onUpdateClient: (client: ClientType) => void;
-}
-
-interface Data {
-  email: string;
-  name: string;
 }
 
 const ListItem: React.FC<Props> = ({
@@ -33,10 +25,6 @@ const ListItem: React.FC<Props> = ({
     setIsUpdating(false);
   };
 
-  const {
-    formState: {},
-  } = useForm<Data>();
-
   return (
     <View style={styles.listContainer}>
       {isUpdating ? (
@@ -53,7 +41,10 @@ const ListItem: React.FC<Props> = ({
             <Text style={styles.item}>Email: {email}</Text>
           </View>
           <View>
-            <Pressable style={styles.button} onPress={onDelete}>
+            <Pressable
+              style={styles.button}
+              onPress={onDelete}
+              testID="delete-button">
               <Text style={styles.buttonText}>Delete</Text>
             </Pressable>
             <Pressable style={styles.button}>

@@ -3,6 +3,7 @@ import {ClientType} from '../helpers/Types';
 import {iClientContext} from '../helpers/Types';
 import Toast from 'react-native-simple-toast';
 import {SubmitHandler} from 'react-hook-form';
+import fetch from 'cross-fetch';
 
 export const AppPermissionsContext = createContext<iClientContext | null>(null);
 

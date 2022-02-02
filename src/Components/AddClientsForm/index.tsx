@@ -54,7 +54,11 @@ const AddClientsForm = ({navigation}: Props) => {
             pattern: {value: EMAIL_REGEX, message: 'Email is invalid'},
           }}
         />
-        <CustomButton onPress={handleSubmit(onCreate)} text="ADD NEW CLIENT" />
+        <CustomButton
+          onPress={handleSubmit(onCreate)}
+          text="ADD NEW CLIENT"
+          testID="submit-button"
+        />
       </View>
     </>
   );
