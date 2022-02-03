@@ -7,6 +7,8 @@ interface Props {
   client: ClientType;
   onDelete: () => void;
   onUpdateClient: (client: ClientType) => void;
+  onCloseButton?: () => void;
+  clients?: ClientType[];
 }
 
 const ListItem: React.FC<Props> = ({

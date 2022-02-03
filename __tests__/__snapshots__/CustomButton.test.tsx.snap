@@ -16,6 +16,7 @@ exports[`CustomButton renders correctly 1`] = `
   onStartShouldSetResponder={[Function]}
   style={
     Object {
+      "backgroundColor": "#015D67",
       "borderRadius": 10,
       "marginHorizontal": 50,
       "marginVertical": 20,
