@@ -23,6 +23,7 @@ export type ClientType = {
 };
 
 export type RootStackParamList = {
+  User: undefined;
   Login: undefined;
   Home: undefined;
   Welcome: undefined;

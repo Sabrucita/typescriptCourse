@@ -9,6 +9,7 @@ import Login from '../Components/Auth/Login';
 import Welcome from '../Components/Welcome';
 import Home from '../Components/Home';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import User from '../Components/User';
 
 const ClientsStack = createNativeStackNavigator();
 
@@ -67,6 +68,7 @@ const Navigator = () => {
         })}>
         <Tab.Screen name="Home" component={Home} options={{title: 'Home'}} />
         <Tab.Screen name="Clients" component={ClientStackScreen} />
+        <Tab.Screen name="User" component={User} />
       </Tab.Navigator>
     </NavigationContainer>
   ) : (

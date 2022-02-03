@@ -12,6 +12,9 @@ target 'typescriptCourse' do
     :hermes_enabled => true
   )
 
+  permissions_path = '../node_modules/react-native-permissions/ios'
+  pod 'Permission-Camera', :path => "#{permissions_path}/Camera"
+  
   target 'typescriptCourseTests' do
     inherit! :complete
     # Pods for testing

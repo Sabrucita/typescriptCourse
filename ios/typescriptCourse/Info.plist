@@ -70,5 +70,7 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>NSCameraUsageDescription</key>
+	<string>Let $(APP_DISPLAY_NAME) use the camera to record your face.</string>
 </dict>
 </plist>
