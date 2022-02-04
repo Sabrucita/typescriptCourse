@@ -23,10 +23,6 @@ describe('ListItem', () => {
       />,
     );
 
-    test('U is not in here.', () => {
-      expect('here').not.toMatch(/u/);
-    });
-
     const deleteButton = getByTestId('delete-button');
     fireEvent.press(deleteButton);
 
