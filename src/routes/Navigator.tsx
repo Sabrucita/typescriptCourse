@@ -61,6 +61,14 @@ const Navigator = () => {
                   color={color}
                 />
               );
+            } else if (route.name === 'User') {
+              return (
+                <Ionicons
+                  name={focused ? 'people' : 'people-outline'}
+                  size={size}
+                  color={color}
+                />
+              );
             }
           },
           tabBarActiveTintColor: '#015D67',
