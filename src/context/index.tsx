@@ -70,6 +70,7 @@ const AppPermissionsProvider: FC = ({children}) => {
         deleteHandler,
         onUpdateClient,
         onAddClientPressed,
+        getClients,
       }}>
       {children}
     </AppPermissionsContext.Provider>

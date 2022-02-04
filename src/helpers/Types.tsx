@@ -46,4 +46,5 @@ export interface iClientContext {
   deleteHandler: (id: number) => void;
   onUpdateClient: (client: ClientType) => void;
   onAddClientPressed: (data: ClientType) => void;
+  getClients: () => void;
 }

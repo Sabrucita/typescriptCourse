@@ -34,6 +34,9 @@ const ClientsList: React.FC<Props> = ({navigation}) => {
           )}
           <FlatList
             refreshing={permissionsProvider?.loading}
+            onRefresh={() => {
+              permissionsProvider?.getClients();
+            }}
             ListHeaderComponent={
               <>
                 <CustomButton
